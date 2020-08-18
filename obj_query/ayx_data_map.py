@@ -60,6 +60,7 @@ def _set_bool(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
         if value is None or value is not bool:
             field.set_null(creator)
+            return
         field.set_from_bool(creator, value)
     return _setter
 
@@ -68,6 +69,7 @@ def _set_string(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
         if value is None or value is not str:
             field.set_null(creator)
+            return
         field.set_from_string(creator, value)
     return _setter
 
@@ -76,6 +78,7 @@ def _set_integer(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
         if value is None or value is not int:
             field.set_null(creator)
+            return
         field.set_from_int64(creator, value)
     return _setter
 
@@ -84,6 +87,7 @@ def _set_decimal(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
         if value is None or value is not float:
             field.set_null(creator)
+            return
         field.set_from_float(creator, value)
     return _setter
 
@@ -92,5 +96,6 @@ def _set_datetime(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
         if value is None or not (value is datetime.time or value is datetime.datetime):
             field.set_null(creator)
+            return
         field.set_from_string(creator, value.strftime("%Y-%m-%d %H:%M:%S"))
     return _setter
