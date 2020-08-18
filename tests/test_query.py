@@ -1,7 +1,8 @@
+import datetime
 import unittest
 import json
-from data_map import DataMap
-from query import Query
+from obj_query import DataMap
+from obj_query import Query
 
 
 class QueryTests(unittest.TestCase):
@@ -94,6 +95,12 @@ class QueryTests(unittest.TestCase):
         data_map.transfer(json_data)
         self.assertEqual('abc', consumer.Key1)
         self.assertEqual(20, consumer.Key2)
+
+    def test_convert_datetime(self):
+        json_data = json.loads('{"value":"2020-01-02 03:04:05"}')
+        retriever = Query().get("value").to_datetime("%Y-%m-%d %H:%M:%S").finalize()
+        value = retriever.get_from(json_data)
+        self.assertEqual(datetime.datetime(2020, 1, 2, 3, 4, 5), value)
 
 
 if __name__ == '__main__':

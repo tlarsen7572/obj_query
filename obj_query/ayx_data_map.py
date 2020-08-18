@@ -1,6 +1,7 @@
+import datetime
 from typing import Dict, Tuple, Callable, Any
-from data_map import DataMap
-from query import Retriever
+from obj_query.data_map import DataMap
+from obj_query.query import Retriever
 from enum import Enum
 import AlteryxPythonSDK as Sdk
 
@@ -89,7 +90,7 @@ def _set_decimal(field: Sdk.Field, creator: Sdk.RecordCreator):
 
 def _set_datetime(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
-        if value is None or value is not str:
+        if value is None or value is not datetime.time:
             field.set_null(creator)
-        field.set_from_string(creator, value)
+        field.set_from_string(creator, value.strftime("%Y-%m-%d %H:%M:%S"))
     return _setter

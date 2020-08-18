@@ -1,3 +1,4 @@
+import datetime
 from typing import List
 
 
@@ -51,6 +52,15 @@ class Query:
             except:
                 return None
         self.Operations.append(_last)
+        return self
+
+    def to_datetime(self, date_format: str):
+        def _to_datetime(obj):
+            try:
+                return datetime.datetime.strptime(obj, date_format)
+            except:
+                return None
+        self.Operations.append(_to_datetime)
         return self
 
     def finalize(self) -> Retriever:

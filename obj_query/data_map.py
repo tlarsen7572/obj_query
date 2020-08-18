@@ -1,4 +1,4 @@
-from query import Retriever
+from obj_query.query import Retriever
 from typing import Callable, Any, Dict
 
 
