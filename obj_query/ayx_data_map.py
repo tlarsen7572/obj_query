@@ -90,7 +90,7 @@ def _set_decimal(field: Sdk.Field, creator: Sdk.RecordCreator):
 
 def _set_datetime(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
-        if value is None or value is not datetime.time:
+        if value is None or not (value is datetime.time or value is datetime.datetime):
             field.set_null(creator)
         field.set_from_string(creator, value.strftime("%Y-%m-%d %H:%M:%S"))
     return _setter
