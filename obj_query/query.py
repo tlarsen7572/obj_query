@@ -23,7 +23,10 @@ class Query:
                 return None
             if hasattr(obj, attr_or_key):
                 return getattr(obj, attr_or_key)
-            return obj.get(attr_or_key, None)
+            try:
+                return obj[attr_or_key]
+            except:
+                return None
         self.Operations.append(_get)
         return self
 
