@@ -58,7 +58,7 @@ class AyxDataMap:
 
 def _set_bool(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
-        if value is None or value is not bool:
+        if value is None or not isinstance(value, bool):
             field.set_null(creator)
             return
         field.set_from_bool(creator, value)
@@ -67,7 +67,7 @@ def _set_bool(field: Sdk.Field, creator: Sdk.RecordCreator):
 
 def _set_string(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
-        if value is None or value is not str:
+        if value is None or not isinstance(value, str):
             field.set_null(creator)
             return
         field.set_from_string(creator, value)
@@ -76,25 +76,25 @@ def _set_string(field: Sdk.Field, creator: Sdk.RecordCreator):
 
 def _set_integer(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
-        if value is None or value is not int:
+        if value is None or not (isinstance(value, int) or isinstance(value, float)):
             field.set_null(creator)
             return
-        field.set_from_int64(creator, value)
+        field.set_from_int64(creator, int(value))
     return _setter
 
 
 def _set_decimal(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
-        if value is None or value is not float:
+        if value is None or not (isinstance(value, int) or isinstance(value, float)):
             field.set_null(creator)
             return
-        field.set_from_float(creator, value)
+        field.set_from_float(creator, float(value))
     return _setter
 
 
 def _set_datetime(field: Sdk.Field, creator: Sdk.RecordCreator):
     def _setter(value):
-        if value is None or not (value is datetime.time or value is datetime.datetime):
+        if value is None or not (isinstance(value, datetime.time) or isinstance(value, datetime.datetime)):
             field.set_null(creator)
             return
         field.set_from_string(creator, value.strftime("%Y-%m-%d %H:%M:%S"))

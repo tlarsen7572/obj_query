@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
    name='obj_query',
-   version='0.3',
+   version='0.4',
    description='translate JSON and Python objects to Alteryx RecordInfos',
    license="MIT",
    author='Thomas Larsen',
