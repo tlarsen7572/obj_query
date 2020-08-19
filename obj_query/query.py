@@ -1,5 +1,5 @@
 import datetime
-from typing import List
+from typing import List, Callable, Any
 
 
 class Retriever:
@@ -64,6 +64,10 @@ class Query:
             except:
                 return None
         self.Operations.append(_to_datetime)
+        return self
+
+    def custom(self, func: Callable[[Any], Any]):
+        self.Operations.append(func)
         return self
 
     def finalize(self) -> Retriever:

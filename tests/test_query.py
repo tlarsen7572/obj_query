@@ -102,6 +102,14 @@ class QueryTests(unittest.TestCase):
         value = retriever.get_from(json_data)
         self.assertEqual(datetime.datetime(2020, 1, 2, 3, 4, 5), value)
 
+    def test_custom_callback(self):
+        def custom_callback(obj):
+            return obj + "bc"
+        json_data = json.loads('{"value":"a"}')
+        retriever = Query().get("value").custom(custom_callback).finalize()
+        value = retriever.get_from(json_data)
+        self.assertEqual('abc', value)
+
 
 if __name__ == '__main__':
     unittest.main()
