@@ -88,7 +88,7 @@ def _set_decimal(field: Sdk.Field, creator: Sdk.RecordCreator):
         if value is None or not (isinstance(value, int) or isinstance(value, float)):
             field.set_null(creator)
             return
-        field.set_from_float(creator, float(value))
+        field.set_from_double(creator, float(value))
     return _setter
 
 
